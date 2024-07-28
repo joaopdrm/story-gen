@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Generator</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Story Generator</h1>
+    <form id="keywordsForm">
+        <label for="keywords">Enter 10 keywords (comma separated):</label>
+        <input type="text" id="keywords" name="keywords" required>
+        <button type="submit">Generate Story</button>
+    </form>
+    <div id="story"></div>
+    <script>
+        document.getElementById('keywordsForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const keywords = document.getElementById('keywords').value.split(',').map(word => word.trim());
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ keywords }),
+            });
+            const result = await response.json();
+            document.getElementById('story').innerText = result.story;
+        });
+    </script>
+</body>
+</html>
