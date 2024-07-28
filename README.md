@@ -1,1 +1,1 @@
-# history-gen
+# story-gen
