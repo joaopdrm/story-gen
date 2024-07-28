@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from app.model import StoryGenerator
 from app.utils import validate_keywords
 from huggingface_hub import login
-login(token='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')
+login(token='your hugginface token')
 
 app = Flask(__name__)
 story_generator = StoryGenerator()
